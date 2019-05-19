@@ -8,13 +8,7 @@
     android:clipChildren="false"
     tools:context=".Connect4">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text="Reset"
-        android:id="@+id/reset_button"
-        />
+
 
     <LinearLayout
         android:id="@+id/turn_indicator"

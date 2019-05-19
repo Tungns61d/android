@@ -53,15 +53,16 @@
 
 
             <ImageButton
-                android:id="@+id/returnMain"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 android:layout_weight="1"
-
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/home_ico"
+
+                android:onClick="home"
+
                 />
 
             <ImageButton
@@ -74,7 +75,7 @@
                 app:srcCompat="@drawable/return_ico" />
 
             <ImageButton
-                android:id="@+id/abc_button"
+                android:id="@+id/menu_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -84,7 +85,7 @@
 
 
             <ImageButton
-                android:id="@+id/asd_button"
+                android:id="@+id/trophy_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
