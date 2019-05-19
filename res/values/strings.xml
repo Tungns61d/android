@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Project</string>
+
+    <!--connect4 strings-->
+    <string name="action_settings">Settings</string>
+    <item name="action_settings" type="id" />
+</resources>
