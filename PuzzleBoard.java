@@ -1,9 +1,5 @@
 package com.example.project;
 
-/**
- * Created by akgarhwal
- */
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.Log;
@@ -12,7 +8,7 @@ import java.util.ArrayList;
 
 public class PuzzleBoard {
 
-    public static int NUM_TILES = MainActivity.LEVEL;
+    public static int NUM_TILES = Puzzle_level.LEVEL;
     private static final int[][] NEIGHBOUR_COORDS = {
             { -1, 0 },
             { 1, 0 },
@@ -24,7 +20,7 @@ public class PuzzleBoard {
     private ArrayList<PuzzleTile> tiles;
 
     PuzzleBoard(Bitmap bitmap, int parentWidth) {
-        NUM_TILES = MainActivity.LEVEL;
+        NUM_TILES = Puzzle_level.LEVEL;
         step=0;
         previousBoard = null;
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap,parentWidth,parentWidth,true);
@@ -55,22 +51,7 @@ public class PuzzleBoard {
         this.step = otherBoard.step + 1;
     }
 
-    public void reset() {
-        // Nothing for now but you may have things to reset once you implement the solver.
-        step=0;
-    }
 
-    public void setPreviousBoard(PuzzleBoard previousBoard){
-        this.previousBoard = previousBoard;
-    }
-
-    public PuzzleBoard getPreviousBoard(){
-        return this.previousBoard;
-    }
-
-    public void setStep(int step){
-        this.step = step;
-    }
 
 
     @Override
@@ -163,34 +144,6 @@ public class PuzzleBoard {
         return possibleBoards;
     }
 
-    public int priority() {
-        int priority=0;
-        for (int i=0; i< (NUM_TILES*NUM_TILES); i++ ){
-            if(tiles.get(i) != null) {
-                int pos = tiles.get(i).getNumber();
-                int xpos = pos%NUM_TILES;
-                int ypos = pos/NUM_TILES;
-                int expX = i%NUM_TILES;
-                int expY = i/NUM_TILES;
-                priority += Math.abs( xpos-expX ) + Math.abs( ypos-expY );
-            }
-        }
-        //Log.d("TAG1","Step in pri : "+step);
-        priority += step;
-        return priority;
-    }
 
-    public String convertToString(){
-        String s = "";
-        for ( PuzzleTile tile : this.tiles ){
-            if(tile == null){
-                s += "A ";
-            }
-            else{
-                s += tile.getNumber();
-            }
-        }
-        return s;
-    }
 
 }

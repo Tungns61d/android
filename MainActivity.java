@@ -22,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static int LEVEL=3;
+    //public static int LEVEL=3;
     public void puzzle3(View view) {
-        this.LEVEL = 3;
+       // this.LEVEL = 3;
         Intent in = new Intent(this, Puzzle_level.class);
         startActivity(in);
         finish();

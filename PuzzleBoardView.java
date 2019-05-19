@@ -1,22 +1,16 @@
 package com.example.project;
 
-/**
- * Created by akgarhwal .
- */
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.util.Log;
+
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
+
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.PriorityQueue;
+
 import java.util.Random;
 
 public class PuzzleBoardView extends View {
@@ -39,7 +33,7 @@ public class PuzzleBoardView extends View {
 
         this.invalidate();
         int width = getMeasuredWidth();
-        Log.d("TAG","PuzzleBoard Object Called with width "+ width);
+
         puzzleBoard = new PuzzleBoard(imageBitmap, width);
         shuffle();
         shuffle();
@@ -50,7 +44,7 @@ public class PuzzleBoardView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Log.d("TAG","onDraw");
+
         super.onDraw(canvas);
 
         Puzzle3.setScore(Score);
@@ -61,9 +55,9 @@ public class PuzzleBoardView extends View {
                 puzzleBoard.draw(canvas);
                 if (animation.size() == 0) {
                     animation = null;
-                    puzzleBoard.reset();
-                    Toast toast = Toast.makeText(activity, "Solved! ", Toast.LENGTH_LONG);
-                    toast.show();
+
+
+
                 } else {
                     this.postInvalidateDelayed(500);
                 }
@@ -77,7 +71,7 @@ public class PuzzleBoardView extends View {
         if (animation == null && puzzleBoard != null) {
             // Do something. Then:
             Score = 0;
-            Log.d("TAG","Need to do something in order to shffle");
+
             for(int i=0; i< 25;i++){
                 ArrayList<PuzzleBoard> neighbours = puzzleBoard.neighbours(); //get possible board form this current board
                 int randIndex = random.nextInt( neighbours.size() );
@@ -89,9 +83,7 @@ public class PuzzleBoardView extends View {
             }
             invalidate();
         }
-        else{
-            Toast.makeText(getContext(),"Take a picture and then try shuffle",Toast.LENGTH_SHORT).show();
-        }
+
     }
 
     @Override
@@ -107,11 +99,7 @@ public class PuzzleBoardView extends View {
                         if (puzzleBoard.resolved()) {
                             Puzzle3.setBestScore(Score);
                             String msg = "Congratulations! \n Moves : "+Score;
-                            if (Score == -1) {
-                                msg = "First Shuffle then Solve";
-                            }
-                            Toast toast = Toast.makeText(activity, msg, Toast.LENGTH_LONG);
-                            toast.show();
+
                             Score = -1;
                         }
                         return true;
@@ -121,91 +109,5 @@ public class PuzzleBoardView extends View {
         return super.onTouchEvent(event);
     }
 
-    private Comparator<PuzzleBoard> comparator = new Comparator<PuzzleBoard>() {
-        @Override
-        public int compare(PuzzleBoard lhs, PuzzleBoard rhs) {
-            return lhs.priority() - rhs.priority();
-        }
-    };
 
-
-
-    public void solve() {
-        if( animation == null && puzzleBoard != null) {
-
-            Score = -1;
-
-            if( puzzleBoard.resolved() ){
-                Toast.makeText(getContext(),"Already Solved!",Toast.LENGTH_SHORT).show();
-                return ;
-            }
-
-            Log.d("TAG", "solve: start");
-
-            int z = 0;
-            PriorityQueue<PuzzleBoard> boardQueue = new PriorityQueue<>(1, comparator);
-
-            PuzzleBoard current = new PuzzleBoard(puzzleBoard);
-            current.setPreviousBoard(null);
-            current.setStep(0);
-            boardQueue.add(current);
-            HashSet<String> set = new HashSet<>();
-
-            //Time Testing
-            long startTime = System.currentTimeMillis();
-
-            while (!(boardQueue.isEmpty())) {
-
-                Log.d("TAG", "Step : " + z);
-                z++;
-                PuzzleBoard bestState = boardQueue.poll();
-
-                set.remove(bestState.convertToString());
-
-                if (bestState.resolved()) {
-
-                    ArrayList<PuzzleBoard> solution = new ArrayList<>();
-                    while (bestState.getPreviousBoard() != null) {
-                        solution.add(bestState);
-                        bestState = bestState.getPreviousBoard();
-                    }
-                    Collections.reverse(solution);
-                    boardQueue.clear();
-                    animation = solution;
-
-                    long endTime = System.currentTimeMillis();
-                    long timeTaken = endTime-startTime;
-
-                    Toast.makeText(getContext(),"Time : "+timeTaken+"ms",Toast.LENGTH_LONG).show();
-
-                    invalidate(); //update UI
-                    break;
-                }
-                else{
-                    for (PuzzleBoard tempBoard : bestState.neighbours()) {
-                        String s = tempBoard.convertToString();
-                        if (!(set.contains(s))) {
-                            set.add(s);
-                            boardQueue.add(tempBoard);
-                        }
-                    }
-
-                    long endTime = System.currentTimeMillis();
-                    long timeTaken = endTime-startTime;
-                    if(timeTaken > 10000){
-                        boardQueue.clear();
-                        Toast.makeText(getContext(),"Taking too much time...",Toast.LENGTH_LONG).show();
-                        invalidate();
-                        break;
-                    }
-                }
-            }
-        }
-        else if (puzzleBoard == null) {
-            Toast.makeText(getContext(),"Take a picture and shuffle it",Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(getContext(),"Shuffle it and then click on solve",Toast.LENGTH_SHORT).show();
-        }
-    }
 }

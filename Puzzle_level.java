@@ -13,7 +13,7 @@ public class Puzzle_level extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puzzle_level);
-        LEVEL = 3;
+        //LEVEL = 3;
     }
 
     public void puzzle3x3(View view){

@@ -5,11 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.provider.MediaStore;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -21,10 +20,10 @@ public class Puzzle3 extends AppCompatActivity {
     private PuzzleBoardView boardView;
     private static TextView bestScore;
 
-    private ImageButton solveButton;
+
     private static TextView score;
     private static SharedPreferences sharedpreferences;
-    private Bitmap bitmap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,34 +58,11 @@ public class Puzzle3 extends AppCompatActivity {
 
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if( requestCode == 1 && resultCode == RESULT_OK ){
-
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            boardView.initialize(bitmap);
-        }
-        else{
-            Toast.makeText(getApplicationContext(),"Image not selected",Toast.LENGTH_SHORT).show();
-        }
-
-
-    }
-
-    public void shuffleImage(View view) {
+       public void shuffleImage(View view) {
         boardView.shuffle();
     }
 
 
-    public void solve(View view) {
-
-        solveButton.setClickable(false);
-        boardView.solve();
-        solveButton.setClickable(true);
-
-    }
 
     public void home(View view){
         Intent in = new Intent(this,MainActivity.class);
@@ -102,7 +78,7 @@ public class Puzzle3 extends AppCompatActivity {
     public static void setBestScore(int bScore){
 
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        String key = Integer.toString(MainActivity.LEVEL);
+        String key = Integer.toString(Puzzle_level.LEVEL);
 
         int bestscore = sharedpreferences.getInt(key,-1);
         if(bestscore == -1 ){
@@ -116,7 +92,7 @@ public class Puzzle3 extends AppCompatActivity {
         }
 
         String tempScore=  bestScore.getText().toString();
-        if(tempScore.equals("--")){
+        if(tempScore.equals("---")){
             bestScore.setText("" + bScore);
             editor.putInt(key, bScore);
             editor.commit();

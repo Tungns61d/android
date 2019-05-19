@@ -1,9 +1,5 @@
 package com.example.project;
 
-/**
- * Created by akgarhwal .
- */
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 

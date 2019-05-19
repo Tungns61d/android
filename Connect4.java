@@ -1,16 +1,18 @@
 package com.example.project;
 
 import android.content.Intent;
-import android.media.Image;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+
+
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
+import android.widget.ImageButton;
+
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,7 +20,7 @@ public class Connect4 extends AppCompatActivity {
 
     private ImageView[][] cells;
     private View boardView;
-    private Board board;
+    private Connect4_board board;
     private ViewHolder viewHolder;
     private static int NUM_ROWS=6;
     private static int NUM_COLS=7;
@@ -34,7 +36,7 @@ public class Connect4 extends AppCompatActivity {
         setContentView(R.layout.activity_connect4);
 
         //generate Board
-        board=new Board(NUM_COLS,NUM_ROWS);
+        board=new Connect4_board(NUM_COLS,NUM_ROWS);
         boardView=findViewById(R.id.game_board);
         buildCells();
 
@@ -54,7 +56,7 @@ public class Connect4 extends AppCompatActivity {
             }
         });
 
-        Button resetButton=(Button) findViewById(R.id.reset_button);
+        ImageButton resetButton=(ImageButton) findViewById(R.id.reset_button);
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,27 +75,7 @@ public class Connect4 extends AppCompatActivity {
 
     }
 
-    //@Override
-    //public boolean onCreateOptionsMenu(Menu menu){
-    //    //Inflate the menu, this adds items to the action bar if it is present
-    //    getMenuInflater().inflate(R.menu.game,menu);
-    //    return true;
-    //}
 
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        //Handle action bar item clicks here. The action bar will
-        // automaically handle clicks on the Home/Up button,
-        //so long as you specify a parent activity in Android Manifest
-        int id=item.getItemId();
-        if(id==R.id.action_settings){
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-
-    }
 
     public void buildCells(){
         cells=new ImageView[NUM_ROWS][NUM_COLS];
@@ -121,7 +103,7 @@ public class Connect4 extends AppCompatActivity {
         cell.setY(move);
         cell.setImageResource(resourceForTurn());
         TranslateAnimation anim = new TranslateAnimation(0, 0, 0, Math.abs(move));
-        anim.setDuration(850);
+        anim.setDuration(800);
         anim.setFillAfter(true);
         cell.startAnimation(anim);
         board.occupyCell(col, row);
@@ -133,7 +115,7 @@ public class Connect4 extends AppCompatActivity {
     }
 
     private void win() {
-        int color = board.turn == Board.Turn.FIRST ? getResources().getColor(R.color.primary_player) : getResources().getColor(R.color.secondary_player);
+        int color = board.turn == Connect4_board.Turn.FIRST ? getResources().getColor(R.color.primary_player) : getResources().getColor(R.color.secondary_player);
         viewHolder.winnerText.setTextColor(color);
         viewHolder.winnerText.setVisibility(View.VISIBLE);
     }
