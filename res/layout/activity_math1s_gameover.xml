@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@android:color/transparent"
     tools:context=".Math1s_gameover">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@drawable/button_yellow"
+        android:background="@drawable/galaxy3"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -19,17 +19,17 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30sp"
             android:fontFamily="@font/supercell"
-            android:text="GAME OVER"
+            android:text="GAME  OVER"
+            android:textColor="@color/primary_player"
 
-            android:textColor="#FF0000"
-
-            android:textSize="40sp" />
+            android:textSize="28sp" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:background="@drawable/phobocacloai" />
 
         <TextView
@@ -39,13 +39,13 @@
             android:fontFamily="@font/supercell"
             android:text="SCORE: "
 
-            android:textColor="#004FFF"
-            android:textSize="34sp" />
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="30sp" />
 
         <LinearLayout
             android:id="@+id/buttonLayout"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="200sp"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal"
             >

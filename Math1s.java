@@ -132,7 +132,7 @@ public class Math1s extends AppCompatActivity {
 
     public  void gameOver(){
 
-        Intent intent=new Intent(this,Math1s_gameover.class);
+        Intent intent=new Intent(getApplicationContext(),Math1s_gameover.class);
         intent.putExtra(EXTRA_NUMBER,score);
         startActivity(intent);
     }

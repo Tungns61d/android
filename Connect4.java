@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.view.MenuItem;
 
 import android.view.MotionEvent;
 import android.view.View;
@@ -74,9 +75,20 @@ public class Connect4 extends AppCompatActivity {
 
 
     }
+/*
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        //Handle action bar item clicks here. The action bar will
+        // automaically handle clicks on the Home/Up button,
+        //so long as you specify a parent activity in Android Manifest
+        int id=item.getItemId();
+        if(id==R.id.action_settings){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
 
-
-
+    }
+*/
     public void buildCells(){
         cells=new ImageView[NUM_ROWS][NUM_COLS];
         for (int r=0;r<NUM_ROWS;r++){
@@ -99,11 +111,11 @@ public class Connect4 extends AppCompatActivity {
             return;
 
         final ImageView cell=cells[row][col];
-        float move=-(cell.getHeight() * row + cell.getHeight() + 15);
+        float move=-(cell.getHeight() * row + cell.getHeight() + 20);
         cell.setY(move);
         cell.setImageResource(resourceForTurn());
         TranslateAnimation anim = new TranslateAnimation(0, 0, 0, Math.abs(move));
-        anim.setDuration(800);
+        anim.setDuration(500);
         anim.setFillAfter(true);
         cell.startAnimation(anim);
         board.occupyCell(col, row);

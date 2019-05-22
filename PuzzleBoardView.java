@@ -5,12 +5,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-
+import android.widget.Toast;
 import android.view.MotionEvent;
 import android.view.View;
-
+import android.util.Log;
 import java.util.ArrayList;
-
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.PriorityQueue;
 import java.util.Random;
 
 public class PuzzleBoardView extends View {
@@ -55,7 +58,9 @@ public class PuzzleBoardView extends View {
                 puzzleBoard.draw(canvas);
                 if (animation.size() == 0) {
                     animation = null;
-
+                    puzzleBoard.reset();
+                    Toast toast = Toast.makeText(activity, "Solved! ", Toast.LENGTH_LONG);
+                    toast.show();
 
 
                 } else {
@@ -99,7 +104,11 @@ public class PuzzleBoardView extends View {
                         if (puzzleBoard.resolved()) {
                             Puzzle3.setBestScore(Score);
                             String msg = "Congratulations! \n Moves : "+Score;
-
+                            if (Score == -1) {
+                                msg = "First Shuffle then Solve";
+                            }
+                            Toast toast = Toast.makeText(activity, msg, Toast.LENGTH_LONG);
+                            toast.show();
                             Score = -1;
                         }
                         return true;

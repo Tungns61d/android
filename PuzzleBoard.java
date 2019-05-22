@@ -51,7 +51,10 @@ public class PuzzleBoard {
         this.step = otherBoard.step + 1;
     }
 
-
+    public void reset() {
+        // Nothing for now but you may have things to reset once you implement the solver.
+        step=0;
+    }
 
 
     @Override

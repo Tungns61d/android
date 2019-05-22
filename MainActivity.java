@@ -18,27 +18,28 @@ public class MainActivity extends AppCompatActivity {
     public void math1s(View view) {
         Intent in = new Intent(this, Math1s.class);
         startActivity(in);
-        finish();
+       // finish();
 
     }
 
     //public static int LEVEL=3;
     public void puzzle3(View view) {
        // this.LEVEL = 3;
-        Intent in = new Intent(this, Puzzle_level.class);
+        Intent in = new Intent(getApplicationContext(), Puzzle_level.class);
         startActivity(in);
-        finish();
+        //finish();
 
     }
 
     public void connect4(View view) {
         Intent in = new Intent(this, Connect4.class);
         startActivity(in);
-        finish();
+      //  finish();
 
     }
 
     public void quit(View view){
+        finish();
         System.exit(0);
     }
 
