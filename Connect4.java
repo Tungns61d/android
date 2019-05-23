@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 
@@ -34,6 +36,11 @@ public class Connect4 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
+        this.getSupportActionBar().hide(); // hide the title bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN); //enable full screen
+
         setContentView(R.layout.activity_connect4);
 
         //generate Board

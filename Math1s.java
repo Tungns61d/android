@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -25,6 +26,8 @@ public class Math1s extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_math1s);
+
+
         initialize_Component();
 
         initialize_Data();
@@ -82,7 +85,7 @@ public class Math1s extends AppCompatActivity {
     }
     private CountDownTimer timer;
     private void setup_countdown(){
-        timer =new CountDownTimer(1200,50){
+        timer =new CountDownTimer(1100,30){
             public void onTick(long millisUntilFinished) {
                 if(isPause){
                     cancel();
@@ -126,7 +129,7 @@ public class Math1s extends AppCompatActivity {
 
     private int random_Number2(){
         Random r=new Random();
-        int i=r.nextInt(60)+1;
+        int i=r.nextInt(50)+1;
         return i;
     }
 

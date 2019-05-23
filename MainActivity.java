@@ -4,12 +4,19 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
+        this.getSupportActionBar().hide(); // hide the title bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN); //enable full screen
+
         setContentView(R.layout.activity_main);
     }
 
@@ -18,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     public void math1s(View view) {
         Intent in = new Intent(this, Math1s.class);
         startActivity(in);
-       // finish();
+        finish();
 
     }
 
@@ -27,14 +34,14 @@ public class MainActivity extends AppCompatActivity {
        // this.LEVEL = 3;
         Intent in = new Intent(getApplicationContext(), Puzzle_level.class);
         startActivity(in);
-        //finish();
+       // finish();
 
     }
 
     public void connect4(View view) {
         Intent in = new Intent(this, Connect4.class);
         startActivity(in);
-      //  finish();
+        finish();
 
     }
 

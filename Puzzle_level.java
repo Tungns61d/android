@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
+
 
 
 public class Puzzle_level extends AppCompatActivity {
@@ -14,9 +14,7 @@ public class Puzzle_level extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        setContentView(R.layout.activity_puzzle_level);
+         setContentView(R.layout.activity_puzzle_level);
         //LEVEL = 3;
     }
 

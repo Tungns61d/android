@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.view.View;
+
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,6 +29,9 @@ public class Puzzle3 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_puzzle3);
 
         score=(TextView)findViewById(R.id.score2);
@@ -108,7 +112,7 @@ public class Puzzle3 extends AppCompatActivity {
         }
 
         String tempScore=  bestScore.getText().toString();
-        if(tempScore.equals("---")){
+        if(tempScore.equals("--")){
             bestScore.setText("" + bScore);
             editor.putInt(key, bScore);
             editor.commit();
