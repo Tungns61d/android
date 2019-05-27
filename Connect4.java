@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import android.view.MenuItem;
 
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,7 +22,7 @@ public class Connect4 extends AppCompatActivity {
 
     private ImageView[][] cells;
     private View boardView;
-    private Connect4_board board;
+    private Connect4Board board;
     private ViewHolder viewHolder;
     private static int NUM_ROWS=6;
     private static int NUM_COLS=7;
@@ -44,10 +43,11 @@ public class Connect4 extends AppCompatActivity {
         setContentView(R.layout.activity_connect4);
 
         //generate Board
-        board=new Connect4_board(NUM_COLS,NUM_ROWS);
+        board=new Connect4Board(NUM_COLS,NUM_ROWS);
         boardView=findViewById(R.id.game_board);
         buildCells();
 
+        //when we touch screen -> drop
         boardView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -110,6 +110,8 @@ public class Connect4 extends AppCompatActivity {
         }
     }
 
+
+    //drop to the lowest row
     private void drop(int col){
         if(board.hasWinner)
         return;
@@ -118,7 +120,7 @@ public class Connect4 extends AppCompatActivity {
             return;
 
         final ImageView cell=cells[row][col];
-        float move=-(cell.getHeight() * row + cell.getHeight() + 20);
+        float move=-(cell.getHeight() * row + cell.getHeight() + 20); // the highest row
         cell.setY(move);
         cell.setImageResource(resourceForTurn());
         TranslateAnimation anim = new TranslateAnimation(0, 0, 0, Math.abs(move));
@@ -133,14 +135,15 @@ public class Connect4 extends AppCompatActivity {
         }
     }
 
+    //display text and its color according winner player
     private void win() {
-        int color = board.turn == Connect4_board.Turn.FIRST ? getResources().getColor(R.color.primary_player) : getResources().getColor(R.color.secondary_player);
+        int color = board.turn == Connect4Board.Turn.FIRST ? getResources().getColor(R.color.red) : getResources().getColor(R.color.yellow);
         viewHolder.winnerText.setTextColor(color);
         viewHolder.winnerText.setVisibility(View.VISIBLE);
     }
 
     private void changeTurn() {
-        board.toggleTurn();
+        board.changeTurn();
         viewHolder.turnIndicatorImageView.setImageResource(resourceForTurn());
     }
 

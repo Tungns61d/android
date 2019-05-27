@@ -67,7 +67,10 @@
             android:text="Sum"
             android:textColor="#fffFFF"
             android:textSize="50sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+
+
+            />
 
     </LinearLayout>
 
@@ -88,6 +91,9 @@
             android:fontFamily="@font/supercell"
             android:text="YES"
             android:textColor="#ffffff"
+
+
+
             android:textSize="40dp" />
 
         <Button

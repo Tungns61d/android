@@ -5,19 +5,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.widget.Toast;
 import android.view.MotionEvent;
 import android.view.View;
-import android.util.Log;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.PriorityQueue;
 import java.util.Random;
 
 public class PuzzleBoardView extends View {
-    public static final int NUM_SHUFFLE_STEPS = 40;
+    //public static final int NUM_SHUFFLE_STEPS = 40;
     public int Score;
 
     private Activity activity;
@@ -32,6 +26,7 @@ public class PuzzleBoardView extends View {
         Score = -1;
     }
 
+    //display the game's image
     public void initialize(Bitmap imageBitmap) {
 
         this.invalidate();
@@ -43,33 +38,19 @@ public class PuzzleBoardView extends View {
         shuffle();
         shuffle();
         shuffle();
+        shuffle();
     }
 
     @Override
+
     protected void onDraw(Canvas canvas) {
 
         super.onDraw(canvas);
 
         Puzzle3.setScore(Score);
 
-        if (puzzleBoard != null) {
-            if (animation != null && animation.size() > 0) {
-                puzzleBoard = animation.remove(0);
-                puzzleBoard.draw(canvas);
-                if (animation.size() == 0) {
-                    animation = null;
-                    puzzleBoard.reset();
-                    Toast toast = Toast.makeText(activity, "Solved! ", Toast.LENGTH_LONG);
-                    toast.show();
+        puzzleBoard.draw(canvas);
 
-
-                } else {
-                    this.postInvalidateDelayed(500);
-                }
-            } else {
-                puzzleBoard.draw(canvas);
-            }
-        }
     }
 
     public void shuffle() {
@@ -102,14 +83,9 @@ public class PuzzleBoardView extends View {
                             Score++;
                         }
                         if (puzzleBoard.resolved()) {
-                            Puzzle3.setBestScore(Score);
-                            String msg = "Congratulations! \n Moves : "+Score;
-                            if (Score == -1) {
-                                msg = "First Shuffle then Solve";
-                            }
-                            Toast toast = Toast.makeText(activity, msg, Toast.LENGTH_LONG);
-                            toast.show();
-                            Score = -1;
+                            Puzzle3.setBestScore(Score);//update best score
+
+                            Score = -1;// if solved-> reset score to -1
                         }
                         return true;
                     }

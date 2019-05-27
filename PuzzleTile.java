@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 public class PuzzleTile {
-
+    //puzzle tile object information
     private Bitmap bitmap;
     private int number;
 

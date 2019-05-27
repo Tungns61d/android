@@ -2,13 +2,13 @@ package com.example.project;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.util.Log;
 import java.util.ArrayList;
 
 
 public class PuzzleBoard {
-
-    public static int NUM_TILES = Puzzle_level.LEVEL;
+    /* Board of puzzle game*/
+    public static int NUM_TILES = PuzzleLevel.LEVEL;
+    /*definite the neighbour of each tiles*/
     private static final int[][] NEIGHBOUR_COORDS = {
             { -1, 0 },
             { 1, 0 },
@@ -20,7 +20,7 @@ public class PuzzleBoard {
     private ArrayList<PuzzleTile> tiles;
 
     PuzzleBoard(Bitmap bitmap, int parentWidth) {
-        NUM_TILES = Puzzle_level.LEVEL;
+        NUM_TILES = PuzzleLevel.LEVEL;
         step=0;
         previousBoard = null;
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap,parentWidth,parentWidth,true);
@@ -28,6 +28,7 @@ public class PuzzleBoard {
 
         int blockWidth = parentWidth/NUM_TILES;
 
+        //load the map
         for (int x = 0; x < NUM_TILES; x++){
             for( int y = 0; y< NUM_TILES; y++){
 
@@ -38,7 +39,6 @@ public class PuzzleBoard {
                 else{
                     Bitmap tileBitmap = Bitmap.createBitmap(scaledBitmap, y*blockWidth, x*blockWidth, blockWidth, blockWidth);
                     PuzzleTile tile = new PuzzleTile(tileBitmap, (x*NUM_TILES)+y );
-                    Log.d("TAG",""+((x*NUM_TILES)+y));
                     tiles.add(tile);
                 }
             }
@@ -49,11 +49,6 @@ public class PuzzleBoard {
         previousBoard = otherBoard;
         tiles = (ArrayList<PuzzleTile>) otherBoard.tiles.clone();
         this.step = otherBoard.step + 1;
-    }
-
-    public void reset() {
-        // Nothing for now but you may have things to reset once you implement the solver.
-        step=0;
     }
 
 
@@ -102,6 +97,7 @@ public class PuzzleBoard {
         return false;
     }
 
+    //check if sloved
     public boolean resolved() {
         for (int i = 0; i < NUM_TILES * NUM_TILES - 1; i++) {
             PuzzleTile tile = tiles.get(i);

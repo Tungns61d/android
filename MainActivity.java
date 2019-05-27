@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     //public static int LEVEL=3;
     public void puzzle3(View view) {
        // this.LEVEL = 3;
-        Intent in = new Intent(getApplicationContext(), Puzzle_level.class);
+        Intent in = new Intent(getApplicationContext(), PuzzleLevel.class);
         startActivity(in);
        // finish();
 
@@ -46,8 +46,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void quit(View view){
-        finish();
-        System.exit(0);
+
+       /* System.exit(0);
+        finish();*/
+
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
 }

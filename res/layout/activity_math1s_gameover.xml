@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
-    tools:context=".Math1s_gameover">
+    tools:context=".Math1sGameover">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
                 android:layout_marginTop="30sp"
                 android:fontFamily="@font/supercell"
                 android:text="GAME  OVER"
-                android:textColor="@color/primary_player"
+                android:textColor="@color/red"
 
                 android:textSize="30sp" />
 

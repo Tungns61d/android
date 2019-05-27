@@ -4,8 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <!--connect4 colors-->
-    <color name="board_bg">#4A90E2</color>
-    <color name="secondary_player">#FFD918</color>
-    <color name="primary_player">#FF000B</color>
+
+    <color name="yellow">#FFD918</color>
+    <color name="red">#FF000B</color>
 </resources>

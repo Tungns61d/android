@@ -28,28 +28,28 @@ public class Math1s extends AppCompatActivity {
         setContentView(R.layout.activity_math1s);
 
 
-        initialize_Component();
+        initializeComponent();
 
-        initialize_Data();
+        initializeData();
     }
 
-    private void initialize_Component(){
+    private void initializeComponent(){
 
         txtScore=(TextView)findViewById(R.id.txtScore);
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
         txtOperation=(TextView)findViewById(R.id.txtOperation);
         txtSum=(TextView)findViewById(R.id.txtSum);
 
-        setup_countdown();
+        setupCountdown();
         //---------------------
         correct=findViewById(R.id.correct);
         incorrect=findViewById(R.id.incorrect);
         correct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(sum==fake_sum){
+                if(sum==fakeSum){
                     isPause=false;
-                    initialize_Data();
+                    initializeData();
                     timer.start();
                     score++;
                     txtScore.setText(String.valueOf(score));
@@ -66,9 +66,9 @@ public class Math1s extends AppCompatActivity {
         incorrect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(sum!=fake_sum){
+                if(sum!=fakeSum){
                     isPause=false;
-                    initialize_Data();
+                    initializeData();
                     timer.start();
                     score++;
                     txtScore.setText(String.valueOf(score));
@@ -83,8 +83,11 @@ public class Math1s extends AppCompatActivity {
         //----------
 
     }
+
+
+    //Initialize countdown progressbar
     private CountDownTimer timer;
-    private void setup_countdown(){
+    private void setupCountdown(){
         timer =new CountDownTimer(1100,30){
             public void onTick(long millisUntilFinished) {
                 if(isPause){
@@ -101,41 +104,47 @@ public class Math1s extends AppCompatActivity {
         };
     }
 
-    int sum=0, fake_sum=0;
+    int sum=0, fakeSum=0;
 
-    private void initialize_Data(){
-        int a=random_Number();
-        int b=random_Number();
+
+    //initialize Data include 2 numbers, sum, and fakeSum, random 0,1 if 0 ->sum, else ->fakeSum
+    private void initializeData(){
+        int a=randomNumber();
+        int b=randomNumber();
         sum=a+b;
-        fake_sum=random_Number2();
+        fakeSum=randomNumber2();
         txtOperation.setText(String.format("%s+%s",a,b));
-        int randomTrueFalse =random_Number();
+        int randomTrueFalse =randomNumber();
         if(randomTrueFalse%2==0){
             txtSum.setText(String.format("= %s",sum));
-            fake_sum=sum;
+            fakeSum=sum;
         }
         else {
-            txtSum.setText(String.format("= %s",fake_sum));
+            txtSum.setText(String.format("= %s",fakeSum));
         }
 
 
     }
 
-    private int random_Number(){
+
+    //function random number range 1->30
+    private int randomNumber(){
         Random r=new Random();
         int i=r.nextInt(30)+1;
         return i;
     }
 
-    private int random_Number2(){
+    //function random fakeSum range 1->50
+    private int randomNumber2(){
         Random r=new Random();
         int i=r.nextInt(50)+1;
         return i;
     }
 
+    //when game over, open game_over activity and send score
     public  void gameOver(){
 
-        Intent intent=new Intent(getApplicationContext(),Math1s_gameover.class);
+        Intent intent=new Intent(getApplicationContext(),Math1sGameover.class);
         intent.putExtra(EXTRA_NUMBER,score);
         startActivity(intent);
     }

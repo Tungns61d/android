@@ -38,17 +38,19 @@ public class Puzzle3 extends AppCompatActivity {
         bestScore=(TextView)findViewById(R.id.bestscore2);
 
 
-        // this code programmatically adds the PuzzleBoardView to the UI
+        // post the PuzzleBoardView to the screen
         RelativeLayout container=(RelativeLayout)findViewById(R.id.puzzle_container);
         boardView=new PuzzleBoardView(this);
 
-        //Some setup of view
+        // setups of view
         boardView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT));
         container.addView(boardView);
 
+        //Save bestscore by sharedPreferences
         sharedpreferences=getSharedPreferences("BestScore", Context.MODE_PRIVATE);
         setBestScore(-1);
 
+        //image -> image defaul we up in res
         container.post(new Runnable() {
             @Override
             public void run() {
@@ -61,24 +63,7 @@ public class Puzzle3 extends AppCompatActivity {
 }
 
 
-  /*  @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if( requestCode == 1 && resultCode == RESULT_OK ){
-
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            boardView.initialize(bitmap);
-        }
-        else{
-            Toast.makeText(getApplicationContext(),"Image not selected",Toast.LENGTH_SHORT).show();
-        }
-
-
-    }
-*/
-
-       public void shuffleImage(View view) {
+    public void shuffleImage(View view) {
         boardView.shuffle();
     }
 
@@ -90,15 +75,17 @@ public class Puzzle3 extends AppCompatActivity {
         finish();
     }
 
+
     public static void setScore(int Score){
         score.setText(""+Score);
         return ;
     }
 
+    //function update best score
     public static void setBestScore(int bScore){
 
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        String key = Integer.toString(Puzzle_level.LEVEL);
+        String key = Integer.toString(PuzzleLevel.LEVEL);
 
         int bestscore = sharedpreferences.getInt(key,-1);
         if(bestscore == -1 ){
