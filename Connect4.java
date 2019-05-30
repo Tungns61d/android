@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
-
 
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -82,20 +80,7 @@ public class Connect4 extends AppCompatActivity {
 
 
     }
-/*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        //Handle action bar item clicks here. The action bar will
-        // automaically handle clicks on the Home/Up button,
-        //so long as you specify a parent activity in Android Manifest
-        int id=item.getItemId();
-        if(id==R.id.action_settings){
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
 
-    }
-*/
     public void buildCells(){
         cells=new ImageView[NUM_ROWS][NUM_COLS];
         for (int r=0;r<NUM_ROWS;r++){

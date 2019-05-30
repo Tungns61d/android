@@ -57,7 +57,7 @@ public class Math1s extends AppCompatActivity {
                 }else{
                     isPause=true;
                     gameOver();
-
+                    score=0;
 
                 }
 
@@ -75,7 +75,7 @@ public class Math1s extends AppCompatActivity {
                 }else{
                     isPause=true;
                     gameOver();
-
+                    score=0;
                 }
             }
         });
