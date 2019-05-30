@@ -1,6 +1,8 @@
 package com.example.project;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +18,13 @@ public class Math1sGameover extends AppCompatActivity {
   //  private Button returnHome;
 
     private static TextView textView1;
+    private static SharedPreferences sharedPreferences;
+    private static TextView bestScoreMath1s;
+    private static int bestscore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         setContentView(R.layout.activity_math1s_gameover);
         Intent intent=getIntent();
@@ -28,16 +33,19 @@ public class Math1sGameover extends AppCompatActivity {
         textView1.setText("Score: "+ score);
 
 
+        bestScoreMath1s=(TextView)findViewById(R.id.bestScoreMath1s);
+        sharedPreferences=getSharedPreferences("bestScoreMath1s", Context.MODE_PRIVATE);
+        bestscore = sharedPreferences.getInt("bestScoreMath1s",0);
+        //update best score
+        setBestScore(score);
 
-       ImageButton returnGame=(ImageButton) findViewById(R.id.return_game);
+        ImageButton returnGame=(ImageButton) findViewById(R.id.return_game);
         returnGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 resetMath1s();
             }
         });
-
-
     }
 
 
@@ -52,5 +60,20 @@ public class Math1sGameover extends AppCompatActivity {
         Intent intent =new Intent(this,Math1s.class);
         startActivity(intent);
         finish();
+    }
+
+
+    //update best score
+    public static void setBestScore(int bScore){
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        if(bScore > bestscore) {
+            editor.putInt("bestScoreMath1s", bScore);
+            bestScoreMath1s.setText("Best: " + bScore);
+            editor.commit();
+            return;
+        }
+        bestScoreMath1s.setText("Best: " + bestscore);
     }
 }
